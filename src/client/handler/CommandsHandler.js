@@ -2,6 +2,7 @@ const { REST, Routes } = require('discord.js');
 const { info, error, success } = require('../../utils/Console');
 const { readdirSync } = require('fs');
 const DiscordBot = require('../DiscordBot');
+const config = require('../../config');
 const ApplicationCommand = require('../../structure/ApplicationCommand');
 const MessageCommand = require('../../structure/MessageCommand');
 
@@ -61,7 +62,15 @@ class CommandsHandler {
             }
         }
 
-        success(`Successfully loaded ${this.client.collection.application_commands.size} application commands and ${this.client.collection.message_commands.size} message commands.`);
+        const slashCmds = this.client.collection.application_commands.size;
+        const msgCmds = this.client.collection.message_commands.size;
+        const aliases = this.client.collection.message_commands_aliases.size;
+        
+        success(`Commands loaded successfully:
+• ${slashCmds} Slash (/) commands
+• ${msgCmds} Message commands (${aliases} aliases)
+• Prefix: "${config.commands.prefix}"
+Use ${config.commands.prefix}help or /help to see all commands`);
     }
 
     reload = () => {

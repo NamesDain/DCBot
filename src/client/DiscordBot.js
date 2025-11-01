@@ -24,9 +24,9 @@ class DiscordBot extends Client {
     login_attempts = 0;
     login_timestamp = 0;
     statusMessages = [
-        { name: 'Status 1', type: 4 },
-        { name: 'Status 2', type: 4 },
-        { name: 'Status 3', type: 4 }
+        { name: '?help | /help', type: 4 },
+        { name: '/ping for latency', type: 4 },
+        { name: `${config.commands.prefix}ping for prefix cmd`, type: 4 }
     ];
 
     commands_handler = new CommandsHandler(this);
@@ -45,10 +45,11 @@ class DiscordBot extends Client {
                 Partials.User
             ],
             presence: {
+                status: 'online',
                 activities: [{
-                    name: 'keep this empty',
+                    name: 'Starting up...',
                     type: 4,
-                    state: 'DiscordJS-V14-Bot-Template v3'
+                    state: 'Bot is initializing...'
                 }]
             }
         });
